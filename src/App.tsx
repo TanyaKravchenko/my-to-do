@@ -33,10 +33,10 @@ function App() {
 
     let filteredTasks = tasks;
     if (filter === 'Active') {
-        filteredTasks = tasks.filter(el => el.isDone !== true)
+        filteredTasks = tasks.filter(el => !el.isDone)
     }
     if (filter === 'Completed') {
-        filteredTasks = tasks.filter(el => el.isDone === true)
+        filteredTasks = tasks.filter(el => el.isDone)
     }
     const Filtered = (value: TasksFilteredType) => {
         setFilter(value)
