@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../App.css';
 import {TasksFilteredType, TasksType} from '../App';
 import classes from './Todolist.module.css'
@@ -6,18 +6,24 @@ import classes from './Todolist.module.css'
 export type TodolistPropsType = {
     title: string
     tasks: Array<TasksType>
-    todoDelete: (taskId: number) => void
+    todoDelete: (taskId: string) => void
     filteredTasks: Array<TasksType>
     filtered: (value: TasksFilteredType) => void
+    addTask: (newTitle: string) => void
 }
 
 export const Todolist = (props: TodolistPropsType) => {
+    const [title, setTitle] = useState('')
+
+    const addTask = () => {
+        props.addTask(title)
+    }
 
     return (
         <div className={classes.container}>
             <h1>{props.title}</h1>
             <input/>
-            <button>X</button>
+            <button onClick={addTask}>add</button>
             <ul>
                 {props.filteredTasks.map((el, index) => {
                     return (
