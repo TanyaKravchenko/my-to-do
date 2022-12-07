@@ -6,9 +6,18 @@ import classes from './Todolist.module.css'
 export type TodolistPropsType = {
     title: string
     tasks: Array<TasksType>
+    removeTask: (taskId: string) => void
+    filter: TasksFilteredType
+    changeFilter: (value: TasksFilteredType) => void
 }
 
 export const Todolist = (props: TodolistPropsType) => {
+    //
+    // const removeTaskHandler = () => {
+    //     return (
+    //
+    //     )
+    // }
 
     return (
         <div className={classes.container}>
@@ -22,56 +31,28 @@ export const Todolist = (props: TodolistPropsType) => {
                             <li>
                                 <input type={'checkbox'} checked={el.isDone}/>
                                 <span>{el.title}</span>
-                                <button>X</button>
+                                <button onClick={() => {
+                                    props.removeTask(el.id)
+                                }}>X
+                                </button>
                             </li>
 
                         )
                     })
                 }
             </ul>
-            <button>All</button>
-            <button>Active</button>
-            <button>Completed</button>
+            <button onClick={() => {
+                props.changeFilter('All')
+            }}>All
+            </button>
+            <button onClick={() => {
+                props.changeFilter('Active')
+            }}>Active
+            </button>
+            <button onClick={() => {
+                props.changeFilter('Completed')
+            }}>Completed
+            </button>
         </div>
     );
 }
-
-
-// export type TodolistPropsType = {
-//     title: string
-//     tasks: Array<TasksType>
-//     todoDelete: (taskId: string) => void
-//     filteredTasks: Array<TasksType>
-//     filtered: (value: TasksFilteredType) => void
-//     addTask: (newTitle: string) => void
-// }
-
-// export const Todolist = (props: TodolistPropsType) => {
-//     const [title, setTitle] = useState('')
-//
-//     const addTask = () => {
-//         props.addTask(title)
-//     }
-//
-//     return (
-//         <div className={classes.container}>
-//             <h1>{props.title}</h1>
-//             <input/>
-//             <button onClick={addTask}>add</button>
-//             <ul>
-//                 {props.filteredTasks.map((el, index) => {
-//                     return (
-//                         <li key={el.id}>
-//                             <span><input type="checkbox" checked={el.isDone}/>{el.title}</span>
-//                             <span>{el.isDone}</span>
-//                             <button onClick={() => props.todoDelete(el.id)}>X</button>
-//                         </li>
-//                     )
-//                 })}
-//             </ul>
-//             <button onClick={() => props.filtered('All')}>All</button>
-//             <button onClick={() => props.filtered('Active')}>Active</button>
-//             <button onClick={() => props.filtered('Completed')}>Completed</button>
-//         </div>
-//     );
-// }
