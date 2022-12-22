@@ -16,6 +16,7 @@ export const Todolist = (props: TodolistPropsType) => {
     return (
         <div className={classes.container}>
             <h3>{props.title}</h3>
+            <h2>{props.title}</h2>
             <input/>
             <button>+</button>
             <ul>
