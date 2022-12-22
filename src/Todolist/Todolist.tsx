@@ -48,11 +48,7 @@ export const Todolist = (props: TodolistPropsType) => {
             <button onClick={() => {
                 props.changeFilter('Completed')
             }}>Completed
-            </button>
-            <button onClick={() => {
-                props.changeFilter('Test')
-            }}>Completed
-            </button>
+            </button>git
         </div>
     );
 }
