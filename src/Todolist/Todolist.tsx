@@ -6,22 +6,35 @@ import classes from './Todolist.module.css'
 export type TodolistPropsType = {
     title: string
     tasks: Array<TasksType>
-    // removeTask: (taskId: string) => void
+    removeTask: (taskId: string) => void
     // filter: TasksFilteredType
-    // changeFilter: (value: TasksFilteredType) => void
+    changeFilter: (value: TasksFilteredType) => void
 }
 
 export const Todolist = (props: TodolistPropsType) => {
+
+    // const removeTaskHandler = () => {
+    //     props.removeTask(taskId)
+    // }
 
     return (
         <div className={classes.container}>
             <h3>{props.title}</h3>
             <input/>
+            <button>Add</button>
             <ul>
                 {
-                    tasksrops
+                    props.tasks.map(t =>
+                        <li>
+                            <button onClick={() => props.removeTask(t.id)}>X</button>
+                            <input type={'checkbox'} checked={t.isDone}/>
+                            <span>{t.title}</span>
+                        </li>)
                 }
             </ul>
+            <button onClick={() => props.changeFilter}>All</button>
+            <button onClick={() => props.changeFilter}>Active</button>
+            <button onClick={() => alert('Completed')}>Completed</button>
         </div>
     );
 }
