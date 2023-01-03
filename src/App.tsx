@@ -19,28 +19,34 @@ function App() {
         {id: v1(), title: 'TypeScript', isDone: true},
     ])
 
+    const [filter, setFilter] = useState<TasksFilteredType>('All')
+
     const removeTask = (taskId: string) => {
         setTasks(tasks.filter(t => t.id !== taskId))
     }
 
     const filteredTasks = () => {
         let filteredTasks = tasks
-        if('Active') {
-            return filteredTasks.filter(t => !t.isDone)
+        if(filter === 'Active') {
+            filteredTasks = tasks.filter(t => !t.isDone)
         }
-        if('Completed') {
-            return filteredTasks.filter(t => t.isDone)
+        if(filter === 'Completed') {
+           filteredTasks = tasks.filter(t => t.isDone)
         }
         return filteredTasks
+    }
+
+    const changeFilter = (value: TasksFilteredType) => {
+        setFilter(value)
     }
 
     return (
         <div>
             <Todolist
                 title={'What to learn'}
-                tasks={tasks}
+                tasks={filteredTasks()}
                 removeTask={removeTask}
-                changeFilter={filteredTasks}
+                changeFilter={changeFilter}
             />
         </div>)
 }
