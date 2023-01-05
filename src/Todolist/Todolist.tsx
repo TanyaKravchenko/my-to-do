@@ -9,9 +9,11 @@ export type TodolistPropsType = {
     removeTask: (taskId: string) => void
     // filter: TasksFilteredType
     changeFilter: (value: TasksFilteredType) => void
+    addTask: (title: string) => void
 }
 
 export const Todolist = (props: TodolistPropsType) => {
+    const [newAddedTask, setNewAddedTask] = useState('')
 
     // const removeTaskHandler = () => {
     //     props.removeTask(taskId)
@@ -21,7 +23,7 @@ export const Todolist = (props: TodolistPropsType) => {
         <div className={classes.container}>
             <h3>{props.title}</h3>
             <input/>
-            <button>Add</button>
+            <button onClick={() => props.addTask(newAddedTask)}>Add</button>
             <ul>
                 {
                     props.tasks.map(t =>

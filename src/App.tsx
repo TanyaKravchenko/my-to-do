@@ -25,6 +25,15 @@ function App() {
         setTasks(tasks.filter(t => t.id !== taskId))
     }
 
+    const addTask = (title: string) => {
+        let newTask = {
+            id: v1(),
+            title: 'JSNew',
+            isDone: false
+        }
+        setTasks([newTask, ...tasks])
+    }
+
     const filteredTasks = () => {
         let filteredTasks = tasks
         if(filter === 'Active') {
@@ -47,6 +56,7 @@ function App() {
                 tasks={filteredTasks()}
                 removeTask={removeTask}
                 changeFilter={changeFilter}
+                addTask={addTask}
             />
         </div>)
 }
