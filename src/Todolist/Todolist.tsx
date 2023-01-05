@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import '../App.css';
 import {TasksFilteredType, TasksType} from '../App';
 import classes from './Todolist.module.css'
@@ -15,15 +15,31 @@ export type TodolistPropsType = {
 export const Todolist = (props: TodolistPropsType) => {
     const [newAddedTask, setNewAddedTask] = useState('')
 
-    // const removeTaskHandler = () => {
-    //     props.removeTask(taskId)
-    // }
+    const addTaskHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setNewAddedTask(e.currentTarget.value)
+    }
 
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            props.addTask(newAddedTask)
+            setNewAddedTask('')
+        }
+    }
+
+    const onClickHandler = () => {
+        props.addTask(newAddedTask)
+        setNewAddedTask('')
+    }
+    
     return (
         <div className={classes.container}>
             <h3>{props.title}</h3>
-            <input/>
-            <button onClick={() => props.addTask(newAddedTask)}>Add</button>
+            <input
+                value={newAddedTask}
+                onChange={addTaskHandler}
+                onKeyPress={onKeyPressHandler}
+            />
+            <button onClick={onClickHandler}>Add</button>
             <ul>
                 {
                     props.tasks.map(t =>
