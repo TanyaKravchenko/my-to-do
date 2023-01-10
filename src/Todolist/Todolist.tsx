@@ -30,7 +30,7 @@ export const Todolist = (props: TodolistPropsType) => {
         props.addTask(newAddedTask)
         setNewAddedTask('')
     }
-    
+
     return (
         <div className={classes.container}>
             <h3>{props.title}</h3>

@@ -34,6 +34,11 @@ function App() {
         setTasks([newTask, ...tasks])
     }
 
+    const changeStatus = (taskID: string) => {
+        tasks.find(t => t.id === taskID)
+        setTasks([...tasks])
+    }
+
     const filteredTasks = () => {
         let filteredTasks = tasks
         if(filter === 'Active') {
