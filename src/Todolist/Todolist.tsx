@@ -2,6 +2,8 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import '../App.css';
 import {TasksFilteredType, TasksType} from '../App';
 import classes from './Todolist.module.css'
+import {Simulate} from 'react-dom/test-utils';
+import error = Simulate.error;
 
 export type TodolistPropsType = {
     title: string
@@ -15,21 +17,27 @@ export type TodolistPropsType = {
 
 export const Todolist = (props: TodolistPropsType) => {
     const [newAddedTask, setNewAddedTask] = useState('')
+    const [error, setError] = useState<string | null>(null)
+
+    const onClickHandler = () => {
+        if (newAddedTask.trim() !== '') {
+            props.addTask(newAddedTask.trim())
+            setNewAddedTask('')
+        } else {
+            setError('Title is required')
+        }
+    }
 
     const addTaskHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewAddedTask(e.currentTarget.value)
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        setError(null)
         if (e.key === 'Enter') {
             props.addTask(newAddedTask)
             setNewAddedTask('')
         }
-    }
-
-    const onClickHandler = () => {
-        props.addTask(newAddedTask)
-        setNewAddedTask('')
     }
 
     const onAllClickHandler = () => props.changeFilter('All')
@@ -44,8 +52,10 @@ export const Todolist = (props: TodolistPropsType) => {
                 value={newAddedTask}
                 onChange={addTaskHandler}
                 onKeyPress={onKeyPressHandler}
+                className={error ? 'error' : ''}
             />
             <button onClick={onClickHandler}>Add</button>
+            {error && <div className={'error-message'}>{error}</div>}
             <ul>
                 {
                     props.tasks.map(t => {
