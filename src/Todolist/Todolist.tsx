@@ -4,11 +4,12 @@ import {TasksFilteredType, TasksType} from '../App';
 import classes from './Todolist.module.css'
 
 export type TodolistPropsType = {
+    id: string
     title: string
     tasks: Array<TasksType>
     removeTask: (taskId: string) => void
     filter: TasksFilteredType
-    changeFilter: (value: TasksFilteredType) => void
+    changeFilter: (value: TasksFilteredType, todolistId: string) => void
     addTask: (title: string) => void
     changeTaskStatus: (taskID: string, isDone: boolean) => void
 }
@@ -38,14 +39,16 @@ export const Todolist = (props: TodolistPropsType) => {
         }
     }
 
-    const onAllClickHandler = () => props.changeFilter('All')
-    const onActiveClickHandler = () => props.changeFilter('Active')
-    const onCompletedClickHandler = () => props.changeFilter('Completed')
+    const onAllClickHandler = () => props.changeFilter('All', props.id)
+    const onActiveClickHandler = () => props.changeFilter('Active', props.id)
+    const onCompletedClickHandler = () => props.changeFilter('Completed', props.id)
 
 
     return (
         <div className={classes.container}>
-            <h3>{props.title}</h3>
+            <h3>{props.title}
+                <button>X</button>
+            </h3>
             <input
                 value={newAddedTask}
                 onChange={addTaskHandler}
