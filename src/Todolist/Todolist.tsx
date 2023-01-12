@@ -53,7 +53,7 @@ export const Todolist = (props: TodolistPropsType) => {
                                 props.removeTask(t.id)
                             }
                             const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                                props.changeTaskStatus(t.id, e.currentTarget.value)
+                                props.changeTaskStatus(t.id, e.currentTarget.checked)
                             }
                             return (
                                 <li>
