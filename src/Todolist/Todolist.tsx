@@ -2,14 +2,12 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import '../App.css';
 import {TasksFilteredType, TasksType} from '../App';
 import classes from './Todolist.module.css'
-import {Simulate} from 'react-dom/test-utils';
-import error = Simulate.error;
 
 export type TodolistPropsType = {
     title: string
     tasks: Array<TasksType>
     removeTask: (taskId: string) => void
-    // filter: TasksFilteredType
+    filter: TasksFilteredType
     changeFilter: (value: TasksFilteredType) => void
     addTask: (title: string) => void
     changeTaskStatus: (taskID: string, isDone: boolean) => void
@@ -82,9 +80,9 @@ export const Todolist = (props: TodolistPropsType) => {
                     )
                 }
             </ul>
-            <button onClick={onAllClickHandler}>All</button>
-            <button onClick={onActiveClickHandler}>Active</button>
-            <button onClick={onCompletedClickHandler}>Completed</button>
+            <button className={props.filter === 'All' ? 'active-filter' : ''} onClick={onAllClickHandler}>All</button>
+            <button className={props.filter === 'Active' ? 'active-filter' : ''} onClick={onActiveClickHandler}>Active</button>
+            <button className={props.filter === 'Completed' ? 'active-filter' : ''} onClick={onCompletedClickHandler}>Completed</button>
         </div>
     );
 }
