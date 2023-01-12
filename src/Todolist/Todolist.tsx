@@ -64,7 +64,7 @@ export const Todolist = (props: TodolistPropsType) => {
                                 props.changeTaskStatus(t.id, e.currentTarget.checked)
                             }
                             return (
-                                <li>
+                                <li key={t.id} className={t.isDone ? 'isDone' : ''}>
                                     <button onClick={removeTaskHandler}
                                     >
                                         X
@@ -81,8 +81,11 @@ export const Todolist = (props: TodolistPropsType) => {
                 }
             </ul>
             <button className={props.filter === 'All' ? 'active-filter' : ''} onClick={onAllClickHandler}>All</button>
-            <button className={props.filter === 'Active' ? 'active-filter' : ''} onClick={onActiveClickHandler}>Active</button>
-            <button className={props.filter === 'Completed' ? 'active-filter' : ''} onClick={onCompletedClickHandler}>Completed</button>
+            <button className={props.filter === 'Active' ? 'active-filter' : ''} onClick={onActiveClickHandler}>Active
+            </button>
+            <button className={props.filter === 'Completed' ? 'active-filter' : ''}
+                    onClick={onCompletedClickHandler}>Completed
+            </button>
         </div>
     );
 }
